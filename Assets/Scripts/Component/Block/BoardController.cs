@@ -1,12 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardController : MonoBehaviour
 {
-
     public List<Block> blocks;
+    public ArrayDisplay arrayDisplay;
 
+    private void OnEnable()
+    {
+        EventManager.Instance.AddListenerSaveData(SaveDataBoard);
+        EventManager.Instance.AddListenerLoadData(LoadBoard);
+    }
 
     private void Start()
     {
@@ -22,12 +28,33 @@ public class BoardController : MonoBehaviour
     }
 
 
+    void LoadBoard()
+    {
+
+    }
+
+
+    void SaveDataBoard()
+    {
+        Vector3[,] d = arrayDisplay.GetArrayDisplay();
+        for (int j = 0; j < 9; j++)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                Debug.Log(d[j, i]);
+
+            }
+        }
+
+        DataManager.Instance.SaveData(arrayDisplay);
+    }
+
     #region generate empty block position
-    float startY = 3.982f;
+    float startY = -4.018f;
     float startX = 2.5f;
     public GameObject prefabBlock;
     float stepX = -1f;
-    float stepY = -1;
+    float stepY = +1;
     void GenerageBlock()
     {
         for (int j = 1; j <= 9; j++)
@@ -39,11 +66,56 @@ public class BoardController : MonoBehaviour
                 _block.gameObject.transform.localPosition = new Vector3(startX + stepX * i, _posY, 0);
                 _block.name = "Block [" + j + "][ " + (i + 1) + "]";
                 Block block = _block.GetComponent<Block>();
+                arrayDisplay.AddToArray(j - 1, i, _block.gameObject.transform.localPosition);
                 blocks.Add(block);
 
             }
             startY += stepY;
         }
+
     }
-    #endregion
+    #endregion  
+}
+[Serializable]
+public class ArrayDisplay
+{
+    public Vector3[,] boardBlock = new Vector3[9, 6];
+
+
+    public void AddToArray(int row, int cow, Vector3 value)
+    {
+        boardBlock[row, cow] = value;
+    }
+    public void ShowArray()
+    {
+        for (int row = 0; row < 9; row++)
+        {
+            for (int cow = 0; cow < 6; cow++)
+            {
+                Debug.Log(boardBlock[row, cow]);
+            }
+        }
+    }
+
+    public Vector3[,] GetArrayDisplay()
+    {
+        return boardBlock;
+    }
+
+}
+
+[Serializable]
+public class BlockData
+{
+    public int row;
+    public int cow;
+    public Block block;
+    int level => block.currentLevel;
+
+
+    public String GetBlockData()
+    {
+        if (block == null) return "";
+        return row + "_" + cow + "_" + level
+    }
 }
