@@ -1,0 +1,96 @@
+{
+"skeleton": {
+	"hash": "MJ6Z71sKwE+OXcRD5F1o2fM955Q",
+	"spine": "3.8.99",
+	"x": -257.5,
+	"y": -237,
+	"width": 511,
+	"height": 442.93,
+	"images": "./image/",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root", "x": -4, "y": -254 },
+	{ "name": "Group 10", "parent": "bone", "x": 5, "y": 188 },
+	{ "name": "Number Puzzle", "parent": "bone", "x": 8, "y": 41 },
+	{ "name": "cua", "parent": "bone", "x": -42.08, "y": 367.84 },
+	{ "name": "so", "parent": "bone", "x": -5.16, "y": 335.43 },
+	{ "name": "eff", "parent": "so", "x": -8.02, "y": 36.61 }
+],
+"slots": [
+	{ "name": "Group 10", "bone": "Group 10", "attachment": "Group 10" },
+	{ "name": "so", "bone": "so", "attachment": "so" },
+	{ "name": "Number Puzzle", "bone": "Number Puzzle", "attachment": "Number Puzzle" },
+	{ "name": "eff", "bone": "eff", "attachment": "eff", "blend": "additive" },
+	{ "name": "cua", "bone": "cua", "attachment": "cua" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"Group 10": {
+				"Group 10": { "x": -3, "y": -13, "width": 511, "height": 206 }
+			},
+			"Number Puzzle": {
+				"Number Puzzle": { "x": -1, "y": 3, "width": 440, "height": 54 }
+			},
+			"cua": {
+				"cua": { "x": -3.92, "y": -5.84, "width": 136, "height": 133 }
+			},
+			"eff": {
+				"eff": { "x": -0.16, "y": -7.31, "scaleX": 0.7, "scaleY": 0.7, "width": 344, "height": 272 }
+			},
+			"so": {
+				"so": { "x": -1.84, "y": 1.57, "width": 254, "height": 145 }
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"bones": {
+			"cua": {
+				"translate": [
+					{},
+					{ "time": 0.1667, "x": -16.88, "y": -18.99 },
+					{ "time": 0.3333 },
+					{ "time": 0.5, "x": -16.88, "y": -18.99 },
+					{ "time": 0.6667 },
+					{ "time": 0.8333, "x": -16.88, "y": -18.99 },
+					{ "time": 1 },
+					{ "time": 1.1667, "x": -16.88, "y": -18.99 },
+					{ "time": 1.3333 },
+					{ "time": 1.5, "x": -16.88, "y": -18.99 },
+					{ "time": 1.6667 },
+					{ "time": 1.8333, "x": -16.88, "y": -18.99 },
+					{ "time": 2 }
+				]
+			},
+			"eff": {
+				"rotate": [
+					{},
+					{ "time": 0.6667, "angle": 120 },
+					{ "time": 1.3333, "angle": -120 },
+					{ "time": 2 }
+				]
+			},
+			"Group 10": {
+				"scale": [
+					{ "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.5, "x": 1.1, "y": 1.1, "curve": 0.25, "c3": 0.75 },
+					{ "time": 1 }
+				]
+			},
+			"Number Puzzle": {
+				"scale": [
+					{ "curve": "stepped" },
+					{ "time": 1 },
+					{ "time": 1.5, "x": 1.1, "y": 1.1 },
+					{ "time": 2 }
+				]
+			}
+		}
+	}
+}
+}

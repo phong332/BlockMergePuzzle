@@ -1,0 +1,41 @@
+
+skeleton.png
+size: 835,835
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Group 10
+  rotate: false
+  xy: 291, 481
+  size: 511, 206
+  orig: 511, 206
+  offset: 0, 0
+  index: -1
+Number Puzzle
+  rotate: false
+  xy: 2, 780
+  size: 439, 53
+  orig: 440, 54
+  offset: 1, 1
+  index: -1
+cua
+  rotate: false
+  xy: 443, 701
+  size: 136, 132
+  orig: 136, 133
+  offset: 0, 0
+  index: -1
+eff
+  rotate: false
+  xy: 2, 518
+  size: 287, 260
+  orig: 344, 272
+  offset: 30, 10
+  index: -1
+so
+  rotate: false
+  xy: 581, 689
+  size: 252, 144
+  orig: 254, 145
+  offset: 1, 0
+  index: -1

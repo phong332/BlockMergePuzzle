@@ -1,0 +1,88 @@
+{
+"skeleton": {
+	"hash": "SX/wja/huhA44qdVstEgfCiWhrE",
+	"spine": "3.8.99",
+	"x": -178.61,
+	"y": -158.84,
+	"width": 351,
+	"height": 307,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root", "x": -4.72, "y": -304.21 },
+	{ "name": "bone3", "parent": "bone", "x": 4.44, "y": 180.77 },
+	{ "name": "bone2", "parent": "bone3", "x": -0.76, "y": 119.55, "scaleX": 2, "scaleY": 2 },
+	{ "name": "eff", "parent": "bone2", "x": 0.41, "y": 4.61 }
+],
+"slots": [
+	{ "name": "eff", "bone": "eff", "attachment": "eff", "blend": "additive" },
+	{ "name": "time", "bone": "bone2", "attachment": "time" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"eff": {
+				"eff": { "x": -1.44, "y": -5.34, "scaleX": 0.5, "scaleY": 0.5, "width": 351, "height": 307 }
+			},
+			"time": {
+				"time": { "x": -0.62, "y": 3.89, "width": 81, "height": 71 }
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"eff": {
+				"color": [
+					{ "time": 2, "color": "ffffffff" },
+					{ "time": 2.3333, "color": "ffffff00" }
+				]
+			},
+			"time": {
+				"color": [
+					{ "time": 2.3333, "color": "ffffffff", "curve": 0.25, "c3": 0.75 },
+					{ "time": 3, "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"bone2": {
+				"translate": [
+					{ "time": 1.6667, "curve": 0.02, "c2": 0.6, "c3": 0.52, "c4": 0.95 },
+					{ "time": 2.3333, "y": 451.42 }
+				],
+				"scale": [
+					{ "x": 0, "y": 0, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.2, "x": 2, "y": 2, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.3333, "curve": "stepped" },
+					{ "time": 1.6667, "curve": 0.25, "c3": 0.75 },
+					{ "time": 2.3333, "x": 0.5, "y": 0.5 }
+				]
+			},
+			"eff": {
+				"rotate": [
+					{},
+					{ "time": 1, "angle": 120 },
+					{ "time": 2, "angle": -120 },
+					{ "time": 3 }
+				],
+				"scale": [
+					{ "x": 0, "y": 0 },
+					{ "time": 0.3333 }
+				]
+			},
+			"bone3": {
+				"translate": [
+					{ "curve": "stepped" },
+					{ "time": 1.6667 },
+					{ "time": 2.3333, "x": -281.86 }
+				]
+			}
+		}
+	}
+}
+}
