@@ -6,11 +6,7 @@ public class RaycastPickBlock : MonoBehaviour
 {
 
     public Block currentBlock;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    Vector3 worldPosition = Vector3.zero;
 
     private void Update()
     {
@@ -34,13 +30,13 @@ public class RaycastPickBlock : MonoBehaviour
             if (currentBlock != null)
             {
                 Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.WorldToScreenPoint(currentBlock.transform.position).z);
-                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(position);
-                currentBlock.MoveBlock(worldPosition);
+                worldPosition = Camera.main.ScreenToWorldPoint(position);
             }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
+            if (currentBlock) currentBlock.StopMove();
             currentBlock = null;
         }
     }
@@ -62,4 +58,17 @@ public class RaycastPickBlock : MonoBehaviour
 
         return hit;
     }
+
+    private void FixedUpdate()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            if (currentBlock)
+            {
+                currentBlock.MoveBlock(worldPosition);
+            }
+        }
+    }
+
+
 }

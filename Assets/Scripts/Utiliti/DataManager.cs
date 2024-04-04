@@ -4,7 +4,6 @@ using UnityEngine;
 using System.IO;
 public class DataManager : SingletonDontDestroyOnLoad<DataManager>
 {
-
     private string savePath;
 
     protected override void Awake()

@@ -28,6 +28,9 @@ public class SpriteData : ScriptableObject
             dataSprite[keyString] = sprites;
         }
     }
+
+
+
 }
 [Serializable]
 public class LevelSprite

@@ -36,16 +36,6 @@ public class BoardController : MonoBehaviour
 
     void SaveDataBoard()
     {
-        Vector3[,] d = arrayDisplay.GetArrayDisplay();
-        for (int j = 0; j < 9; j++)
-        {
-            for (int i = 0; i < 6; i++)
-            {
-                Debug.Log(d[j, i]);
-
-            }
-        }
-
         DataManager.Instance.SaveData(arrayDisplay);
     }
 
@@ -57,7 +47,7 @@ public class BoardController : MonoBehaviour
     float stepY = +1;
     void GenerageBlock()
     {
-        for (int j = 1; j <= 9; j++)
+        for (int j = 1; j <= 5; j++)
         {
             float _posY = startY;
             for (int i = 0; i < 6; i++)
@@ -116,6 +106,6 @@ public class BlockData
     public String GetBlockData()
     {
         if (block == null) return "";
-        return row + "_" + cow + "_" + level
+        return row + "_" + cow + "_" + level;
     }
 }
