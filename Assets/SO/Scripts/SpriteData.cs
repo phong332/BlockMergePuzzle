@@ -8,44 +8,54 @@ using Sirenix.OdinInspector;
 public class SpriteData : ScriptableObject
 {
     [SerializeField]
-    SerializedDictionary<string, List<LevelSprite>> dataSprite;
+    SerializedDictionary<string, listLevelSprite> dataSprite = new SerializedDictionary<string, listLevelSprite>();
 
     [Button]
     public void AddData()
     {
+        dataSprite = new SerializedDictionary<string, listLevelSprite>();
+        string x = "";
+        Sprite icon = null;
+        LevelSprite levelSprite = new LevelSprite();
         for (int i = 1; i <= 6; i++)
         {
             string keyString = "Number " + i;
             List<LevelSprite> sprites = new List<LevelSprite>(30);
             for (int j = 0; j < 30; j++)
             {
-                string x = "Sprite/number" + i + "/" + (j + 1) + ".png";
-                Debug.Log(x);
-                Sprite icon = Resources.Load<Sprite>("Sprite/number" + i + "/" + (j + 1));
-
-                sprites.Add(new LevelSprite(j + 1, icon));
+                x = "Sprite/number" + i + "/" + (j + 1) + ".png";
+                icon = Resources.Load<Sprite>("Sprite/number" + i + "/" + (j + 1));
+                levelSprite = new LevelSprite(j + 1, icon);
+                sprites.Add(levelSprite);
             }
             dataSprite[keyString] = sprites;
         }
     }
 
-
-
 }
+
+
 [Serializable]
 public class LevelSprite
 {
     public int level;
     public Sprite iconBlock;
 
+    public LevelSprite()
+    {
 
+    }
     public LevelSprite(int _level, Sprite _iconBlock)
     {
         level = _level;
         iconBlock = _iconBlock;
     }
 }
-
+[Serializable]
+public class listLevelSprite
+{
+    public List<LevelSprite> levelSprites = new List<LevelSprite>(30);
+}
 [Serializable]
 public class SerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
 {

@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 public enum TypeBlock
 {
@@ -13,14 +11,26 @@ public class Block : MonoBehaviour
 {
     public int currentLevel = 1;
     public GameObject hint;
-    Rigidbody2D rb;
     public SpriteRenderer iconBlock;
 
-    public Block leftLinkedBlock;
-    public Block rightLinkedBlock;
-    public Block topLinkedBlock;
-    public Block bottomLinkedBlock;
+    public bool showData = false;
+    public bool linkedToLeft = false;
+    public bool linkedToRight = false;
+    public bool linkedToTop = false;
+    public bool linkedToBottom = false;
+    [ShowIf("showData", true)]
+    public BlockData blockData;
+    [ShowIf("linkedToLeft", true)]
+    [SerializeField] Block leftLinkedBlock;
+    [ShowIf("linkedToRight", true)]
+    [SerializeField] Block rightLinkedBlock;
+    [ShowIf("linkedToTop", true)]
+    [SerializeField] Block topLinkedBlock;
+    [ShowIf("linkedToBottom", true)]
+    [SerializeField] Block bottomLinkedBlock;
 
+    Vector2 prePos = Vector2.zero;
+    Rigidbody2D rb;
 
     private void OnEnable()
     {
@@ -30,11 +40,13 @@ public class Block : MonoBehaviour
     public void InitBlock(int level, Block linkedLeft, Block linkedRight,
         Block linkedTop, Block linkedBottom)
     {
+
         currentLevel = level;
         leftLinkedBlock = linkedLeft;
         rightLinkedBlock = linkedRight;
         topLinkedBlock = linkedTop;
         bottomLinkedBlock = linkedBottom;
+        prePos = transform.position;
     }
     #region moving logic
     //check xem co the move sang huong co block dang can hay khong
@@ -59,6 +71,7 @@ public class Block : MonoBehaviour
         }
         else
         {
+
             print("not raycast to anything");
         }
 
@@ -67,11 +80,30 @@ public class Block : MonoBehaviour
 
     // check xem neu 1 block co the di chuyen sang trai phai tren duoi
     // va cac linked block cung co the di chuyen duoc hay khong
-    public bool CheckCanMove(Vector3 mousePos)
+    public bool CheckCanMoveThisBlock(Vector3 mousePos)
     {
+        if (CheckBlockCanMoveToDirection(-transform.up) && CheckBlockCanMoveToDirection(transform.up)
+            && CheckBlockCanMoveToDirection(-transform.right) && CheckBlockCanMoveToDirection(transform.right))
+        {
+            return false;
+        }
+
 
         return false;
     }
+
+    bool CheckMoveLeft(Vector3 mousePos)
+    {
+        if (CheckBlockCanMoveToDirection(-transform.right))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     void SetBlockOnMoving()
     {
         gameObject.layer = LayerMask.NameToLayer("MovingBlock");
@@ -121,29 +153,36 @@ public class Block : MonoBehaviour
     public void StopMove()
     {
         ReleaseBlock();
-    }
-    void ReleaseBlock()
-    {
-        ResetBlock();
         if (leftLinkedBlock)
         {
-            leftLinkedBlock.ReleaseBlock();
+            leftLinkedBlock.StopMove();
         }
         if (rightLinkedBlock)
         {
-            rightLinkedBlock.ReleaseBlock();
+            rightLinkedBlock.StopMove();
 
         }
         if (topLinkedBlock)
         {
-            topLinkedBlock.ReleaseBlock();
+            topLinkedBlock.StopMove();
 
         }
         if (bottomLinkedBlock)
         {
-            bottomLinkedBlock.ReleaseBlock();
+            bottomLinkedBlock.StopMove();
 
         }
+    }
+    void ReleaseBlock()
+    {
+        MoveToPrepos();
+        ResetBlock();
+
+    }
+
+    void MoveToPrepos()
+    {
+        transform.DOLocalMove(prePos, 0.2f).SetEase(Ease.Linear);
     }
 
     #endregion
@@ -168,5 +207,9 @@ public class Block : MonoBehaviour
 
             }
         }
+    }
+
+    void UpdateData()
+    {
     }
 }

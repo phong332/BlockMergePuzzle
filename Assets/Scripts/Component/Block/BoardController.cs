@@ -41,26 +41,27 @@ public class BoardController : MonoBehaviour
 
     #region generate empty block position
     float startY = -4.018f;
-    float startX = 2.5f;
+    float startX = -2.5f;
     public GameObject prefabBlock;
-    float stepX = -1f;
+    float stepX = +1f;
     float stepY = +1;
     void GenerageBlock()
     {
-        for (int j = 1; j <= 5; j++)
+        for (int j = 1; j <= 6; j++)
         {
-            float _posY = startY;
-            for (int i = 0; i < 6; i++)
+            float _posX = startX;
+            for (int i = 0; i < 5; i++)
             {
                 var _block = Instantiate(prefabBlock, this.transform);
-                _block.gameObject.transform.localPosition = new Vector3(startX + stepX * i, _posY, 0);
+                _block.gameObject.transform.localPosition = new Vector3(_posX, startY + i * stepY, 0);
                 _block.name = "Block [" + j + "][ " + (i + 1) + "]";
                 Block block = _block.GetComponent<Block>();
+                block.InitBlock(1, null, null, null, null);
                 arrayDisplay.AddToArray(j - 1, i, _block.gameObject.transform.localPosition);
                 blocks.Add(block);
 
             }
-            startY += stepY;
+            startX += stepX;
         }
 
     }
@@ -69,7 +70,7 @@ public class BoardController : MonoBehaviour
 [Serializable]
 public class ArrayDisplay
 {
-    public Vector3[,] boardBlock = new Vector3[9, 6];
+    public Vector3[,] boardBlock = new Vector3[6, 9];
 
 
     public void AddToArray(int row, int cow, Vector3 value)
@@ -78,9 +79,9 @@ public class ArrayDisplay
     }
     public void ShowArray()
     {
-        for (int row = 0; row < 9; row++)
+        for (int row = 0; row < 6; row++)
         {
-            for (int cow = 0; cow < 6; cow++)
+            for (int cow = 0; cow < 9; cow++)
             {
                 Debug.Log(boardBlock[row, cow]);
             }
@@ -94,18 +95,3 @@ public class ArrayDisplay
 
 }
 
-[Serializable]
-public class BlockData
-{
-    public int row;
-    public int cow;
-    public Block block;
-    int level => block.currentLevel;
-
-
-    public String GetBlockData()
-    {
-        if (block == null) return "";
-        return row + "_" + cow + "_" + level;
-    }
-}

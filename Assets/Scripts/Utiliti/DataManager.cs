@@ -1,9 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 public class DataManager : SingletonDontDestroyOnLoad<DataManager>
 {
+
+    public BoardData boardData;
+    public SpriteData spriteData;
+
+
     private string savePath;
 
     protected override void Awake()
@@ -44,3 +48,4 @@ public class DataManager : SingletonDontDestroyOnLoad<DataManager>
         }
     }
 }
+

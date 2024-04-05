@@ -48,9 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58fd534725bd48558601076e2d74188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 0
+  currentLevel: 1
   hint: {fileID: 4026739343881178171}
   iconBlock: {fileID: 0}
+  showData: 0
   leftLinkedBlock: {fileID: 0}
   rightLinkedBlock: {fileID: 0}
   topLinkedBlock: {fileID: 0}
